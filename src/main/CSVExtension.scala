@@ -12,6 +12,10 @@ import org.nlogo.api.Syntax._
 import org.apache.commons.csv._
 import java.io._
 
+object Foo {
+  val foo = new AnyRef
+}
+
 class CSVExtension extends DefaultClassManager {
   def csvFormat(delimiter: Option[String]) =
     (delimiter foldLeft CSVFormat.DEFAULT)(_ withDelimiter _(0))
@@ -97,6 +101,7 @@ class CSVExtension extends DefaultClassManager {
   }
 
   override def load(primManager: PrimitiveManager) = {
+    println(Foo.foo)
     val add = primManager.addPrimitive _
     add("from-line", rowParser(parseValue))
     add("from-string", fullParser(parseValue))
