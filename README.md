@@ -64,12 +64,12 @@ Just use `csv:to-file "/path/to/myfile.csv" my-data`! See [to-file](#to-file) fo
 
 Parses the given string as though it were a row from a CSV file and returns it as a list of values. For example:
 
-    observer> show csv:csv-row-to-strings "one,two,three"
+    observer> show csv:from-row "one,two,three"
     observer: ["one" "two" "three"]
 
 Quotes can be used when items contain commas:
 
-    observer> show csv:csv-row-to-strings "there's,a,comma,\"in,here\""
+    observer> show csv:from-row "there's,a,comma,\"in,here\""
     observer: ["there's" "a" "comma" "in,here"]
 
 You can put two quotes in a row to put an actual quote in an entry. If the entry is not quoted, you can just use one quote:
@@ -90,7 +90,7 @@ Number-like-entries will be parsed as numbers:
 
 To use a different delimiter, you can specify a second, optional argument. Only single character delimiters are supported:
 
-    observer> show (csv:csv-row-to-strings "1;2;3" ";")
+    observer> show (csv:from-row "1;2;3" ";")
     observer: [1 2 3]
 
 Different types of values can be mixed freely:
@@ -106,7 +106,7 @@ Different types of values can be mixed freely:
 
 Parses a string representation of one or more CSV rows and returns it as a list of lists of values. For example:
 
-    observer> show csv:csv-to-strings "1,two,3\nfour,5,true"
+    observer> show csv:from-string "1,two,3\nfour,5,true"
     observer: [[1 "two" 3] ["four" 5 true]]
 
 #### from-file
@@ -124,7 +124,7 @@ Parses an entire CSV file to a list of lists of values. For example, if we have 
 
 Then, we get:
 
-    observer> show csv:file-to-strings "example.csv"
+    observer> show csv:from-file "example.csv"
     observer: [[1 2 3] [4 5 6] [7 8 9] [10 11 12]]
 
 The parser doesn't care if the rows have different numbers of items on them. The number of items in the rows list
@@ -148,7 +148,7 @@ quite easy. For instance, if we have `header.csv` that contains:
 
 This gives:
 
-    observer> foreach csv:file-to-strings "header.csv" show
+    observer> foreach csv:from-file "header.csv" show
     observer: ["My Data"]
     observer: ["2/1/2015"]
     observer: ["Parameters:"]
