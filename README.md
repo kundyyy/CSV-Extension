@@ -35,16 +35,16 @@ Here's an example model that reads in a file one line per tick:
 
     to setup
       clear-all
-      file-close-all % Close any files open from last run
+      file-close-all ; Close any files open from last run
       file-open "data.csv"
-      % other setup goes here
+      ; other setup goes here
       reset-ticks
     end
 
     to go
       if file-at-end? [ stop ]
       set data csv:from-row file-read-line
-      % model update goes here
+      ; model update goes here
       tick
     end
 
